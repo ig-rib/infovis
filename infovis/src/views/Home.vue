@@ -13,7 +13,11 @@
           :gutter="{default: '2px', 1600: '2px', 1300: '2px', 960: '2px'}"
           >
           <v-flex shrink class="week-card-flex">
-            <week-card :titletext="weekInfo.week1.title" :description="weekInfo.week1.description" :link="'semana1'">
+            <week-card
+              :titletext="weekInfo.week1.title"
+              :description="weekInfo.week1.description"
+              :link="'semana1'"
+              img="semana1/makeoverMonday/2003.png">
             </week-card>
           </v-flex>
         </masonry>

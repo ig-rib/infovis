@@ -12,7 +12,10 @@
               </v-list-item-content>
             </v-list-item>
           </v-layout>
-        <v-layout class="image-layout">
+        <v-layout pt-5 px-4 class="image-layout">
+            {{imageSrc}}
+            <v-img class="week-image" :src="require('@/assets/' + img)">
+            </v-img>
         </v-layout>
     </v-card>    
 </template>
@@ -31,6 +34,10 @@ export default {
         description: {
             type: String,
             default: ''
+        },
+        img: {
+            type: String,
+            default: ''
         }
     },
     methods: {
@@ -39,6 +46,12 @@ export default {
                 name: name
             })
         }
+    },
+    computed: {
+        // imageSrc () {
+        //     const image = require.context('@/assets/', false, /\.png$/)
+        //     return image('./' + )
+        // }
     }
 }
 </script>
@@ -77,5 +90,8 @@ export default {
     }
     .image-layout {
         flex-grow: 1;
+    }
+    .week-image {
+        border-radius: 10px;
     }
 </style>
