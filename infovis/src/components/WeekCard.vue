@@ -1,5 +1,9 @@
 <template>
-    <v-card class="week-card" @click="goTo(link)">
+    <v-card
+        min-width="350px !important"
+        min-height="300px"
+        max-width="400px !important"
+        class="week-card" @click="goTo(link)">
         <v-layout class="title-description-layout" column>
             <v-list-item two-line>
               <v-list-item-content class="pa-0"> 
@@ -41,9 +45,6 @@ export default {
 
 <style lang="scss">
     .week-card {
-        max-width: 250px;
-        min-width: 250px;
-        min-height: 250px;
         border-radius: 10px !important;
         -webkit-user-select: none; /* Safari */        
         -moz-user-select: none; /* Firefox */
