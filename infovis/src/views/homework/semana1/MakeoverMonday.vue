@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-carousel>
+        <v-carousel height="auto">
             <v-carousel-item src="@/assets/semana1/makeoverMonday/2003.png"></v-carousel-item>
             <v-carousel-item src="@/assets/semana1/makeoverMonday/2004.png"></v-carousel-item>
             <v-carousel-item src="@/assets/semana1/makeoverMonday/2005.png"></v-carousel-item>
