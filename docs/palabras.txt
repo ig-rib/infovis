@@ -1,0 +1,9 @@
+Index Charts
+Small Multiples
+Horizon Graphs
+Q-Q Plots
+SPLOM (Scatter Plot Matrix)
+Parallel Coordinates
+Flow Maps
+Adjacency Diagrams
+Arc Diagrams
