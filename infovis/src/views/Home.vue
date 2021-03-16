@@ -7,12 +7,13 @@
       Portfolio con tareas de la materia Visualización de la Información de ITBA
     </v-layout>
     <div class="fill-width">
-      <masonry
+      <!-- <masonry
           class="masonry-flex"
           :cols="{default: 4, 1700: 3, 1300: 2, 960: 1}"
           :gutter="{default: '2px', 1600: '2px', 1300: '2px', 960: '2px'}"
-          >
-          <v-flex shrink class="week-card-flex">
+          > -->
+        <v-layout justify-center>
+          <v-flex mx-1 shrink class="week-card-flex">
             <week-card
               :titletext="weekInfo.week1.title"
               :description="weekInfo.week1.description"
@@ -20,7 +21,16 @@
               img="semana1/makeoverMonday/2003.png">
             </week-card>
           </v-flex>
-        </masonry>
+          <v-flex mx-1 shrink class="week-card-flex">
+            <week-card
+              :titletext="weekInfo.week3.title"
+              :description="weekInfo.week3.description"
+              :link="'semana3'"
+              img="semana3/week3overview.png">
+            </week-card>
+          </v-flex>
+        </v-layout>
+        <!-- </masonry> -->
     </div>
   </v-container>
 </template>
@@ -39,6 +49,10 @@ export default {
         week1: {
           title: 'Semana 1',
           description: 'Conceptos nuevos en "A Tour Through The Visualization Zoo" e intento de visualización del dataset "Seats Held by Women in National Parliaments and Governments"'
+        },
+        week3: {
+          title: 'Semana 3',
+          description: 'Makeover Monday Week 11 - World\'s Largest Crops'
         }
       }
     }
@@ -63,6 +77,7 @@ export default {
     display: flex;
     justify-content: center;
     min-width: max-content !important;
+    padding: 5% 0 0 0;
   }
   .fill-width {
     min-width: 100% !important;

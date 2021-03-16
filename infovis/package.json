@@ -16,6 +16,7 @@
     "vue": "^2.6.11",
     "vue-masonry-css": "^1.0.3",
     "vue-router": "^3.2.0",
+    "vue-tableau": "^0.1.7",
     "vuetify": "^2.4.5",
     "vuex": "^3.4.0"
   },

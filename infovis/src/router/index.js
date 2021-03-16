@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Semana1 from '../views/homework/semana1/Semana1.vue'
+import Semana3 from '../views/homework/semana3/Semana3.vue'
 import HomeworkContainer from '../views/homework/HomeworkContainer.vue'
 
 Vue.use(VueRouter)
@@ -23,6 +24,11 @@ const routes = [
         path: 'semana1',
         name: 'semana1',
         component: Semana1
+      },
+      {
+        path: 'semana3',
+        name: 'semana3',
+        component: Semana3
       }
     ]
   },
