@@ -1,8 +1,10 @@
 <template>
     <v-container>
-        <Tableau
-            :url="'https://public.tableau.com/shared/QH6GQGX8F?:display_count=y&:origin=viz_share_link'">
-        </Tableau>
+        <v-layout justify-center>
+            <Tableau
+                :url="'https://public.tableau.com/shared/QH6GQGX8F?:display_count=y&:origin=viz_share_link'">
+            </Tableau>
+        </v-layout>
     </v-container>
 </template>
 
