@@ -12,8 +12,8 @@
           :cols="{default: 4, 1700: 3, 1300: 2, 960: 1}"
           :gutter="{default: '2px', 1600: '2px', 1300: '2px', 960: '2px'}"
           > -->
-        <v-layout justify-center>
-          <v-flex mx-1 shrink class="week-card-flex">
+        <v-layout row wrap justify-center>
+          <v-flex mx-3 shrink class="week-card-flex">
             <week-card
               :titletext="weekInfo.week1.title"
               :description="weekInfo.week1.description"
@@ -21,12 +21,20 @@
               img="semana1/makeoverMonday/2003.png">
             </week-card>
           </v-flex>
-          <v-flex mx-1 shrink class="week-card-flex">
+          <v-flex mx-3 shrink class="week-card-flex">
             <week-card
               :titletext="weekInfo.week3.title"
               :description="weekInfo.week3.description"
               :link="'semana3'"
               img="semana3/week3overview.png">
+            </week-card>
+          </v-flex>
+          <v-flex mx-3 shrink class="week-card-flex">
+            <week-card
+              :titletext="weekInfo.week6.title"
+              :description="weekInfo.week6.description"
+              :link="'semana6'"
+              img="semana6/week6overview.png">
             </week-card>
           </v-flex>
         </v-layout>
@@ -53,6 +61,10 @@ export default {
         week3: {
           title: 'Semana 3',
           description: 'Makeover Monday Week 11 - World\'s Largest Crops'
+        },
+        week6: {
+          title: 'Semana 6',
+          description: 'Población por Provincias Argentinas'
         }
       }
     }
