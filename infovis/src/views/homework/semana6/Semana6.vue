@@ -8,8 +8,6 @@
         </v-layout>
         <v-layout justify-center>
             <Tableau
-                :height="1000"
-                :width="1200"
                 ref="tableau"
                 :url="url">
             </Tableau>
@@ -23,9 +21,6 @@ export default {
         return {
             url: 'https://public.tableau.com/shared/HXS67PCQG?:display_count=y&:origin=viz_share_link'
         }
-    },
-    mounted () {
-        this.$refs.tableau.$forceUpdate()    
     }
 }
 </script>

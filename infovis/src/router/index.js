@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Semana1 from '../views/homework/semana1/Semana1.vue'
 import Semana3 from '../views/homework/semana3/Semana3.vue'
 import Semana6 from '../views/homework/semana6/Semana6.vue'
+import TPDatosPersonales from '../views/homework/tp-datos-personales/TPDatosPersonales.vue'
 import HomeworkContainer from '../views/homework/HomeworkContainer.vue'
 
 Vue.use(VueRouter)
@@ -35,6 +36,11 @@ const routes = [
         path: 'semana6',
         name: 'semana6',
         component: Semana6
+      },
+      {
+        path: 'tp-datos-personales',
+        name: 'tp-datos-personales',
+        component: TPDatosPersonales
       }
     ]
   },

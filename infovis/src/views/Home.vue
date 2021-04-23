@@ -1,5 +1,5 @@
 <template>
-  <v-container id="home-container">
+  <v-container mb-5 id="home-container">
     <v-layout mt-5 justify-center id="home-title">
       Infovis
     </v-layout>
@@ -37,6 +37,14 @@
               img="semana6/week6overview.png">
             </week-card>
           </v-flex>
+          <v-flex mx-3 shrink class="week-card-flex">
+            <week-card
+              :titletext="weekInfo.tpdatospersonales.title"
+              :description="weekInfo.tpdatospersonales.description"
+              :link="'tp-datos-personales'"
+              img="tp-datos-personales/tp-datos-personalesoverview.png">
+            </week-card>
+          </v-flex>
         </v-layout>
         <!-- </masonry> -->
     </div>
@@ -65,6 +73,10 @@ export default {
         week6: {
           title: 'Semana 6',
           description: 'Población por Provincias Argentinas'
+        },
+        tpdatospersonales: {
+          title: 'TP Infovis - Datos Personales',
+          description: 'Noticias'
         }
       }
     }
