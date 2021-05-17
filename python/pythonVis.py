@@ -76,6 +76,13 @@ choro = alt.Chart(choroData,
     title = 'Cost of 1 GB'
     )
 )
+
+# tooltip: es lo que permite que se muestre el tooltip cuando se hace hover over.
+# Se muestra nombre del país y precio del GB. Hay que hacerlo por separado porque
+# si lo hacía en choro tiraba error como si no lo estuviera haciendo sobre ningún dataset
+# Asumo que es porque no se puede hacer las 2 features (coloreo según esquema y tooltips) en una
+# misma sentencia
+
 tooltip = alt.Chart(choroData
 ).mark_geoshape(
     fill='transparent',
@@ -90,6 +97,9 @@ tooltip = alt.Chart(choroData
 #     size=alt.value(8),
 #     opacity=alt.value(5)
 # )
+
+# Al final se superpone todo. Importa el orden o para definir posiciones relativas (más adelante/atrás)
+# se pasa el parámetro baseline='[la posición que se quiera según las opciones de altair, p. ej=top]'
 
 onegb = baseNoData + choro + tooltip #+ baseNoData #+ labels
 onegb.show()
