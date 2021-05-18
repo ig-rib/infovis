@@ -6,7 +6,8 @@
     <!-- https://www.d3-graph-gallery.com/graph/choropleth_basic.html -->
 </head>
 <body>
-    <svg id="my_dataviz" width="1200" height="1000"></svg>
+    <svg id="my_dataviz" width="2200" height="2000"></svg>
+    <div class="tooltip"></div>
 </body>
 <script type="text/javascript">
 
@@ -16,9 +17,9 @@
 
     let path = d3.geoPath()
     let projection = d3.geoMercator()
-        .scale(70)
+        .scale(200)
         .center([0,20])
-        // .translate([, height/2])
+        .translate([width/2, height/2])
 
 
     let data = d3.map()
@@ -26,29 +27,90 @@
         .domain([0.1, 1, 2, 5, 10, 20, 30])
         .range(d3.schemeBlues[7])
 
+    // Esto sirve para fetchear los 2 archivos (async) y manejarlos juntos después
     d3.queue()
-        .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-        .defer(d3.csv, 'https://raw.githubusercontent.com/ig-rib/infovis/python/js-observable/Costof1GBofData.csv', function(d) { data.set(d.Country, +d.AP); })
+        .defer(d3.json, "https://raw.githubusercontent.com/ig-rib/infovis/python/js-observable/custom.geo.json")
+        .defer(d3.csv, 'https://raw.githubusercontent.com/ig-rib/infovis/python/js-observable/Costof1GBofData.csv',
+            // Para los datos del csv de 1GB, lo que se hace es agregarle al elemento que tenga la key "[Nombre del país]" el valor de AP (avg price etc)
+            function(d) { data.set(d.Country, +d.AP); })
         .await(ready);
 
     function ready(error, topo) {
 
-        // Draw the map
+        // console.log(data)
+        console.log(projection)
+        // Dibujo del mapa
         svg.append("g")
-        .selectAll("path")
-        .data(topo.features)
-        .enter()
-        .append("path")
-            // draw each country
-            .attr("d", d3.geoPath()
-            .projection(projection)
-            )
-            // set the color of each country
-            .attr("fill", function (d) {
-                console.log(d)
-                d.total = data.get(d.properties.name) || 0;
-                return colorScale(d.total);
-            });
+            .attr("id", "map")
+            .selectAll("path")
+            .data(topo.features)
+            .enter()
+            .append("path")
+                .attr("class", "country")
+                // d es un atributo de los svgs para determinar el 
+                // camino, en este caso de los bordes de los países.
+                // Por simplicidad, se usa geoPath con los settings definidos
+                // antes (projection)
+                .attr("d", d3.geoPath()
+                .projection(projection)
+                )
+                // Con esto se le asigna el valor a cada país
+                .attr("fill", function (d) {
+                    // console.log(d)
+                    // Los valores de AP que se fijaron antes por nombre del país
+                    // se usan ahora
+                    d.total = data.get(d.properties.name) || 0;
+                    return colorScale(d.total);
+                })
+
+        // https://observablehq.com/@duynguyen1678/choropleth-with-tooltip
+        const Tooltip = d3.select("div.tooltip")
+            .style("position", "absolute")
+            .style("pointer-events", "none")
+            .style("opacity", 0)
+
+        svg
+            .selectAll("path")
+            .on("mouseover", function(d, index) {
+                Tooltip.style("visibility", "visible")
+                    .style("top", (event.pageY)+"px")
+                    .style("left",(event.pageX)+"px")
+                    .style("opacity", 1)
+                    .text(`${d.properties.name}: ${d.total}`)
+                // Tooltip.attr("transform", `translate(${d3.pointer(event, this)})`)
+            })
+            .on("mousemove", function(d, index) {
+                // console.log(d)
+                Tooltip
+                    .text(`${d.properties.name}: ${d.total}`)
+                    .style("left", (d3.mouse(this)[0]+20) + "px")
+                    .style("top", (d3.mouse(this)[1]) + "px")
+                // Tooltip.attr("transform", `translate(${d3.pointer(event, this)})`)
+                d3.select(this)
+                    .attr("stroke", "red")
+                    .raise();
+                })
+            .on("mouseleave", function() {
+                
+                // Tooltip.style("visibility", "hidden")
+                Tooltip.style("opacity", 0)
+                    .text('')
+                d3.select(this)
+                .attr("stroke", null)
+                .lower();
+            })
+        
     }
 </script>
+<style>
+    div.tooltip {
+        opacity: 0;
+        background-color: white;
+        border: solid;
+        min-width: max-content;
+        border-width: 1px;
+        border-radius: 2px;
+        padding: 5px;
+    }
+</style>
 </html>
