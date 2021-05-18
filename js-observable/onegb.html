@@ -1,12 +1,54 @@
 <html>
 <head>
     <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <!-- https://www.d3-graph-gallery.com/graph/choropleth_basic.html -->
 </head>
 <body>
-    <script type="text/javascript">
-        d3.csv('https://raw.githubusercontent.com/ig-rib/infovis/python/js-observable/Costof1GBofData.csv', (error, data) => {
-            console.log(data)
-        })
-    </script>
+    <svg id="my_dataviz" width="1200" height="1000"></svg>
 </body>
+<script type="text/javascript">
+
+    let svg = d3.select("svg")
+    let width = svg.attr("width")
+    let height = svg.attr("height")
+
+    let path = d3.geoPath()
+    let projection = d3.geoMercator()
+        .scale(70)
+        .center([0,20])
+        // .translate([, height/2])
+
+
+    let data = d3.map()
+    let colorScale = d3.scaleThreshold()
+        .domain([0.1, 1, 2, 5, 10, 20, 30])
+        .range(d3.schemeBlues[7])
+
+    d3.queue()
+        .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+        .defer(d3.csv, 'https://raw.githubusercontent.com/ig-rib/infovis/python/js-observable/Costof1GBofData.csv', function(d) { data.set(d.Country, +d.AP); })
+        .await(ready);
+
+    function ready(error, topo) {
+
+        // Draw the map
+        svg.append("g")
+        .selectAll("path")
+        .data(topo.features)
+        .enter()
+        .append("path")
+            // draw each country
+            .attr("d", d3.geoPath()
+            .projection(projection)
+            )
+            // set the color of each country
+            .attr("fill", function (d) {
+                console.log(d)
+                d.total = data.get(d.properties.name) || 0;
+                return colorScale(d.total);
+            });
+    }
+</script>
 </html>
