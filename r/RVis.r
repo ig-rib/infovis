@@ -1,6 +1,7 @@
 library("ggplot2")
 library("readxl")
 library("rworldmap")
+library("sf")
 
 # https://stackoverflow.com/questions/22625119/choropleth-world-map
 
