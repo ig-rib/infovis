@@ -24,9 +24,10 @@ worldmap2 <- ggplot(data=worldExcel) + # Se cargan los datos a ggplot
         tooltip = paste0("Country = ", name, "\n Price of 1GB (USD) = ", AP)), # Se crea el tooltip para mostrar info cuando se hace hover sobre los países
         lwd=0.1) +  # Se baja el grosor de las fronteras
     # Se agrega un gradiente con los colores y breaks siguientes (bastante intuitivo)
-    scale_fill_gradientn(colours = c("lightblue", "lightgreen", "green", "orange", "red", "black"),
+    scale_fill_gradientn(colours = c("lightblue", "lightgreen", "green", "blue", "black"),
                        breaks=c(0,1,2,10, 20, 30),
-                       na.value = "grey")
+                       na.value = "grey") +
+    ggtitle("Averge Price of 1GB in the World (USD)")
 
 wm4 <- girafe(code,
 ggobj=worldmap2,
