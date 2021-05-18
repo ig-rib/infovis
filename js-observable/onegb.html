@@ -3,10 +3,18 @@
     <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <!-- Parte de esto se basa en las siguientes p+aginas -->
     <!-- https://www.d3-graph-gallery.com/graph/choropleth_basic.html -->
+    <!-- https://observablehq.com/@duynguyen1678/choropleth-with-tooltip -->
+    <!-- Import google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <svg id="my_dataviz" width="2200" height="2000"></svg>
+    <h1 class="the-title">Cost of 1GB of Data (USD)</h1>
+    <div class="svg-container">
+        <svg id="my_dataviz" width="1000" height="500"></svg>
+    </div>
     <div class="tooltip"></div>
 </body>
 <script type="text/javascript">
@@ -17,16 +25,14 @@
 
     let path = d3.geoPath()
     let projection = d3.geoMercator()
-        .scale(200)
+        .scale(100)
         .center([0,20])
-        .translate([width/2, height/2])
-
-
+        // .translate([width/2, height/2])
+        
     let data = d3.map()
     let colorScale = d3.scaleThreshold()
         .domain([0.1, 1, 2, 5, 10, 20, 30])
         .range(d3.schemeBlues[7])
-
     // Esto sirve para fetchear los 2 archivos (async) y manejarlos juntos después
     d3.queue()
         .defer(d3.json, "https://raw.githubusercontent.com/ig-rib/infovis/python/js-observable/custom.geo.json")
@@ -75,7 +81,7 @@
                 Tooltip.style("visibility", "visible")
                     .style("top", (event.pageY)+"px")
                     .style("left",(event.pageX)+"px")
-                    .style("opacity", 1)
+                    .style("opacity", 0.95)
                     .text(`${d.properties.name}: ${d.total}`)
                 // Tooltip.attr("transform", `translate(${d3.pointer(event, this)})`)
             })
@@ -109,8 +115,18 @@
         border: solid;
         min-width: max-content;
         border-width: 1px;
-        border-radius: 2px;
+        border-radius: 1px;
         padding: 5px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+    }
+    .the-title {
+        display: flex;
+        justify-content: center;
+    }
+    .svg-container {
+        display: flex;
+        justify-content: center;
     }
 </style>
 </html>
