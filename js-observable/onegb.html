@@ -13,8 +13,10 @@
 <body>
     <h1 class="the-title">Cost of 1GB of Data (USD)</h1>
     <div class="svg-container">
-        <svg id="my_dataviz" width="1000" height="500"></svg>
+        <svg id="my_dataviz" width="1500" height="750"></svg>
     </div>
+    <div class="zoom-tips">Drag and zoom available!</div>
+    <div id="legend1"></div>
     <div class="tooltip"></div>
 </body>
 <script type="text/javascript">
@@ -23,12 +25,17 @@
     let width = svg.attr("width")
     let height = svg.attr("height")
 
+    // Esto es para el zoom. Es una más o menos out of the box de d3
+    const zoom = d3.zoom()
+      .scaleExtent([1, 8])
+      .on('zoom', zoomed);
+
     let path = d3.geoPath()
     let projection = d3.geoMercator()
-        .scale(100)
+        .scale(200)
         .center([0,20])
-        // .translate([width/2, height/2])
-        
+        .translate([width/2, height/2])
+    
     let data = d3.map()
     let colorScale = d3.scaleThreshold()
         .domain([0.1, 1, 2, 5, 10, 20, 30])
@@ -38,7 +45,7 @@
         .defer(d3.json, "https://raw.githubusercontent.com/ig-rib/infovis/python/js-observable/custom.geo.json")
         .defer(d3.csv, 'https://raw.githubusercontent.com/ig-rib/infovis/python/js-observable/Costof1GBofData.csv',
             // Para los datos del csv de 1GB, lo que se hace es agregarle al elemento que tenga la key "[Nombre del país]" el valor de AP (avg price etc)
-            function(d) { data.set(d.Country, +d.AP); })
+            function(d) { data.set(d.Country, +d.AP) })
         .await(ready);
 
     function ready(error, topo) {
@@ -89,8 +96,8 @@
                 // console.log(d)
                 Tooltip
                     .text(`${d.properties.name}: ${d.total}`)
-                    .style("left", (d3.mouse(this)[0]+20) + "px")
-                    .style("top", (d3.mouse(this)[1]) + "px")
+                    .style("left", (event.pageX + 20) + "px")
+                    .style("top", (event.pageY) + "px")
                 // Tooltip.attr("transform", `translate(${d3.pointer(event, this)})`)
                 d3.select(this)
                     .attr("stroke", "red")
@@ -105,8 +112,17 @@
                 .attr("stroke", null)
                 .lower();
             })
-        
+        svg.call(zoom);
     }
+
+    // La función de zoom usa el atributo html transform
+    function zoomed() {
+      svg.select("#map")
+        .selectAll('path') // To prevent stroke width from scaling
+        .attr('transform', d3.event.transform);
+    }
+    
+
 </script>
 <style>
     div.tooltip {
@@ -123,8 +139,15 @@
     .the-title {
         display: flex;
         justify-content: center;
+        font-family: 'Roboto', sans-serif;
     }
     .svg-container {
+        display: flex;
+        justify-content: center;
+    }
+    .zoom-tips {
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
         display: flex;
         justify-content: center;
     }
