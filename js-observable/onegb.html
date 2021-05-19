@@ -37,9 +37,13 @@
         .translate([width/2, height/2])
     
     let data = d3.map()
+    // Uso scaleThreshold porque es más prolija para los valores
+    // de stops que tengo y para después hacer el legend, mientras
+    // que no se pierde claridad en el gráfico
     let colorScale = d3.scaleThreshold()
         .domain([0.1, 1, 2, 5, 10, 20, 30])
         .range(d3.schemeBlues[7])
+        // .unknown("#ffffff")
     // Esto sirve para fetchear los 2 archivos (async) y manejarlos juntos después
     d3.queue()
         .defer(d3.json, "https://raw.githubusercontent.com/ig-rib/infovis/python/js-observable/custom.geo.json")
@@ -72,7 +76,11 @@
                     // console.log(d)
                     // Los valores de AP que se fijaron antes por nombre del país
                     // se usan ahora
-                    d.total = data.get(d.properties.name) || 0;
+                    d.total = data.get(d.properties.name) || undefined;
+                    if (d.total == undefined) {
+                        d.total = NaN
+                        return 'lightgrey'
+                    }
                     return colorScale(d.total);
                 })
 

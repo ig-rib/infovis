@@ -56,7 +56,7 @@ baseNoData = alt.Chart(
     choroNoData).mark_geoshape(
     fill='gray',
     stroke='black',
-    strokeWidth=1
+    strokeWidth=0.2
 ).encode(
 ).properties(width=1200, height=1200)
 
