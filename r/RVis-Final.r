@@ -9,7 +9,7 @@ library("rnaturalearth")
 library("ggiraph")
 
 # Leer el excel (hubo que modificarlo para que los nombres de los países matchearan)
-excel <- read_excel('./infovis/r/Costof1GBofData.xlsx')
+excel <- read_excel('./r/Costof1GBofData.xlsx')
 
 # Fetchear datos de países del mundo
 world <- ne_countries(scale = "medium", returnclass = "sf")
@@ -29,10 +29,12 @@ worldmap2 <- ggplot(data=worldExcel) + # Se cargan los datos a ggplot
                        na.value = "grey") +
     ggtitle("Averge Price of 1GB in the World (USD)")
 
-wm4 <- girafe(code,
-ggobj=worldmap2,
+wm4 <- girafe(
+ggobj=worldmap2
+,
 # opts_zoom para poder hacer zoom (aparecen unos botones en la esq superior derecha)
 options = list(opts_tooltip(use_fill = FALSE),
-                                   opts_zoom(min = 1, max = 5)))
+                                   opts_zoom(min = 1, max = 5))
+)
 
 show(wm4)
