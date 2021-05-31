@@ -46,12 +46,28 @@
             </week-card>
           </v-flex>
           <v-flex mx-3 shrink class="week-card-flex">
-            <week-card
-              :titletext="weekInfo.oneGbOfData.title"
-              :description="weekInfo.oneGbOfData.description"
-              :link="'one-gb-of-data'"
+            <image-card
+              :titletext="weekInfo.oneGbOfDataPython.title"
+              :description="weekInfo.oneGbOfDataPython.description"
+              :hyperlink="'https://colab.research.google.com/drive/1eTx1bz6jbFI88hqxhbkw_ZPPuUqFq6Hv?usp=sharing'"
               img="one-gb-of-data/one-gb-of-data-overview.png">
-            </week-card>
+            </image-card>
+          </v-flex>
+          <v-flex mx-3 shrink class="week-card-flex">
+            <image-card
+              :titletext="weekInfo.oneGbOfDataR.title"
+              :description="weekInfo.oneGbOfDataR.description"
+              :hyperlink="'https://colab.research.google.com/drive/16VhGswMArGXueR399JiM2aJu7DAowXpt?usp=sharing'"
+              img="one-gb-of-data/R.png">
+            </image-card>
+          </v-flex>
+          <v-flex mx-3 shrink class="week-card-flex">
+            <image-card
+              :titletext="weekInfo.oneGbOfDataObservable.title"
+              :description="weekInfo.oneGbOfDataObservable.description"
+              :hyperlink="'https://observablehq.com/@ig-rib/price-of-1gb-in-each-country'"
+              img="one-gb-of-data/observable.png">
+            </image-card>
           </v-flex>
         </v-layout>
         <!-- </masonry> -->
@@ -61,11 +77,13 @@
 
 <script>
 import WeekCard from '@/components/WeekCard.vue'
+import ImageCard from '@/components/ImageCard.vue'
 
 export default {
   name: 'Home',
   components: {
-    'week-card': WeekCard
+    'week-card': WeekCard,
+    'image-card': ImageCard
   },
   data () {
     return {
@@ -86,9 +104,17 @@ export default {
           title: 'TP Infovis - Datos Personales',
           description: 'Noticias'
         },
-        oneGbOfData: {
-          title: 'One GB of Data',
-          description: 'Visualizaciones en Python, R y Observable//JS para la semana 19 del #MakeoverMonday'
+        oneGbOfDataPython: {
+          title: 'One GB of Data - Python Viz',
+          description: 'Visualizaciones en Python para la semana 19 del #MakeoverMonday'
+        },
+        oneGbOfDataR: {
+          title: 'One GB of Data - R Viz',
+          description: 'Visualizaciones en R para la semana 19 del #MakeoverMonday'
+        },
+        oneGbOfDataObservable: {
+          title: 'One GB of Data - Observable Viz',
+          description: 'Visualizaciones en Observable//JS para la semana 19 del #MakeoverMonday'
         }
       }
     }

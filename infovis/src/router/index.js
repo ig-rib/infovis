@@ -44,11 +44,11 @@ const routes = [
         name: 'tp-datos-personales',
         component: TPDatosPersonales
       },
-      {
-        path: 'one-gb-of-data',
-        name: 'one-gb-of-data',
-        component: OneGbOfData
-      }
+      // {
+      //   path: 'one-gb-of-data',
+      //   name: 'one-gb-of-data',
+      //   component: OneGbOfData
+      // }
     ]
   },
   {
