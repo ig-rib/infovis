@@ -106,15 +106,15 @@ export default {
         },
         oneGbOfDataPython: {
           title: 'One GB of Data - Python Viz',
-          description: 'Visualizaciones en Python para la semana 19 del #MakeoverMonday'
+          description: 'Visualización en Python para la semana 19 del #MakeoverMonday'
         },
         oneGbOfDataR: {
           title: 'One GB of Data - R Viz',
-          description: 'Visualizaciones en R para la semana 19 del #MakeoverMonday'
+          description: 'Visualización en R para la semana 19 del #MakeoverMonday'
         },
         oneGbOfDataObservable: {
           title: 'One GB of Data - Observable Viz',
-          description: 'Visualizaciones en Observable//JS para la semana 19 del #MakeoverMonday'
+          description: 'Visualización en Observable//JS para la semana 19 del #MakeoverMonday'
         }
       }
     }

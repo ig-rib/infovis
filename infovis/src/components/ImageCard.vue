@@ -3,7 +3,12 @@
         max-width="400px !important"
         class="week-card" :href="hyperlink" target="_blank">
         <v-layout justify-center class="title-description-layout" column>
-            <div shrink class="week-card-title headline mb-1">{{ titletext }}</div>
+            <v-list-item two-line>
+              <v-list-item-content class="pa-0"> 
+                <div class="week-card-title headline mb-1">{{ titletext }}</div>
+                <div class="week-card-description">{{ description }}</div>
+              </v-list-item-content>
+            </v-list-item>
           </v-layout>
         <v-layout justify-center pt-5 px-4 class="image-layout">
             <v-img class="week-image" :src="require('@/assets/' + img)">
