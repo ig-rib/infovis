@@ -1,18 +1,11 @@
 <template>
     <v-card
-        min-width="350px !important"
-        min-height="300px"
         max-width="400px !important"
-        class="week-card" @click="goTo(link)">
-        <v-layout class="title-description-layout" column>
-            <v-list-item two-line>
-              <v-list-item-content class="pa-0"> 
-                <div class="week-card-title headline mb-1">{{ titletext }}</div>
-                <div class="week-card-description">{{ description }}</div>
-              </v-list-item-content>
-            </v-list-item>
+        class="week-card" :href="hyperlink" target="_blank">
+        <v-layout justify-center class="title-description-layout" column>
+            <div shrink class="week-card-title headline mb-1">{{ titletext }}</div>
           </v-layout>
-        <v-layout pt-5 px-4 class="image-layout">
+        <v-layout justify-center pt-5 px-4 class="image-layout">
             <v-img class="week-image" :src="require('@/assets/' + img)">
             </v-img>
         </v-layout>
@@ -22,10 +15,6 @@
 <script>
 export default {
     props: {
-        link: {
-            type: String,
-            default: 'home'
-        },
         titletext: {
             type: String,
             default: 'Not An Assignment'
@@ -35,6 +24,10 @@ export default {
             default: ''
         },
         img: {
+            type: String,
+            default: ''
+        },
+        hyperlink: {
             type: String,
             default: ''
         }
@@ -57,4 +50,7 @@ export default {
 
 <style lang="scss">
     @import '@/styles/weekCard.scss';
+    .week-card {
+        padding: 1% !important;
+    }
 </style>

@@ -45,6 +45,14 @@
               img="tp-datos-personales/tp-datos-personalesoverview.png">
             </week-card>
           </v-flex>
+          <v-flex mx-3 shrink class="week-card-flex">
+            <week-card
+              :titletext="weekInfo.oneGbOfData.title"
+              :description="weekInfo.oneGbOfData.description"
+              :link="'one-gb-of-data'"
+              img="one-gb-of-data/one-gb-of-data-overview.png">
+            </week-card>
+          </v-flex>
         </v-layout>
         <!-- </masonry> -->
     </div>
@@ -77,6 +85,10 @@ export default {
         tpdatospersonales: {
           title: 'TP Infovis - Datos Personales',
           description: 'Noticias'
+        },
+        oneGbOfData: {
+          title: 'One GB of Data',
+          description: 'Visualizaciones en Python, R y Observable//JS para la semana 19 del #MakeoverMonday'
         }
       }
     }
@@ -85,6 +97,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/weekCard.scss';
+
   #home-container {
     height: 100%;
   }
@@ -96,12 +110,6 @@ export default {
   }
   .masonry-flex > div {
     min-width: min-content !important;
-  }
-  .week-card-flex {
-    display: flex;
-    justify-content: center;
-    min-width: max-content !important;
-    padding: 5% 0 0 0;
   }
   .fill-width {
     min-width: 100% !important;
